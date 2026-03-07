@@ -11,60 +11,40 @@ document.querySelectorAll('.nav-links a').forEach(a => {
   a.addEventListener('click', () => links.classList.remove('open'));
 });
 
-// ─── Scroll reveal ──────────────────────────────────
-const revealElements = document.querySelectorAll(
-  '.brand-card, .service-card, .dept-card, .cta-box, .places-cta'
-);
+// ─── Populate annuaire grids ────────────────────────
+function getInitials(name) {
+  return name.split(/[\s·—-]+/).filter(w => w.length > 1).slice(0, 2).map(w => w[0].toUpperCase()).join('');
+}
 
-revealElements.forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(24px)';
-  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-});
+function colorFromName(name) {
+  const colors = ['#22c55e','#3b82f6','#f59e0b','#ef4444','#8b5cf6','#ec4899','#14b8a6','#f97316','#6366f1','#10b981'];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  return colors[Math.abs(hash) % colors.length];
+}
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      // Stagger siblings
-      const parent = e.target.parentElement;
-      const siblings = Array.from(parent.children).filter(c => revealElements.length && c.style.opacity === '0');
-      if (siblings.length > 1) {
-        siblings.forEach((s, i) => {
-          setTimeout(() => {
-            s.style.opacity = '1';
-            s.style.transform = 'translateY(0)';
-          }, i * 100);
-        });
-      } else {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
-      observer.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.08 });
+function renderGrid(containerId, businesses) {
+  const grid = document.getElementById(containerId);
+  if (!grid || !businesses || businesses.length === 0) {
+    if (grid) grid.innerHTML = '<p style="color:#6b7280;font-size:0.9rem;padding:20px;">Bientôt disponible — professionnels en cours de référencement.</p>';
+    return;
+  }
+  
+  grid.innerHTML = businesses.map(biz => {
+    const initials = getInitials(biz.name);
+    const color = colorFromName(biz.name);
+    return `
+      <a href="${biz.url}" target="_blank" rel="noopener" class="biz-card">
+        <div class="biz-initial" style="background:${color}15;color:${color}">${initials}</div>
+        <h4>${biz.name}</h4>
+        <div class="biz-cat">${biz.cat}</div>
+        ${biz.city ? `<div class="biz-city">📍 ${biz.city}</div>` : ''}
+      </a>
+    `;
+  }).join('');
+}
 
-revealElements.forEach(el => observer.observe(el));
-
-// ─── Counter animation ──────────────────────────────
-const counters = document.querySelectorAll('.stat-num');
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const el = e.target;
-      const target = el.textContent.replace('+', '');
-      const num = parseInt(target);
-      if (isNaN(num)) return;
-      const suffix = el.textContent.includes('+') ? '+' : '';
-      let current = 0;
-      const step = Math.max(1, Math.floor(num / 40));
-      const timer = setInterval(() => {
-        current += step;
-        if (current >= num) { current = num; clearInterval(timer); }
-        el.textContent = current + suffix;
-      }, 30);
-      counterObserver.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
-counters.forEach(c => counterObserver.observe(c));
+// Render all departments
+renderGrid('grid-doubs', BUSINESSES.doubs);
+renderGrid('grid-haute-saone', BUSINESSES['haute-saone']);
+renderGrid('grid-jura', BUSINESSES.jura);
