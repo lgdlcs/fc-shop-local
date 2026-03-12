@@ -201,3 +201,55 @@ ul { list-style: none; }
   .biz-arrow { display: none; }
   .stats-bar { flex-wrap: wrap; gap: 12px; }
 }
+
+/* ============ FLOATING SIDE CARDS ============ */
+.floating-cards {
+  position: fixed; top: 120px;
+  display: flex; flex-direction: column; gap: 16px;
+  z-index: 0; pointer-events: none;
+}
+.floating-left { left: 16px; }
+.floating-right { right: 16px; }
+
+.float-card {
+  width: 180px; padding: 14px 16px;
+  border-radius: 12px; border: 1px solid var(--border);
+  font-size: 0.75rem; line-height: 1.5;
+  pointer-events: auto;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none; color: var(--text);
+  display: block;
+}
+.float-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+.float-card-name {
+  font-weight: 700; font-size: 0.82rem;
+  margin-bottom: 3px; display: flex; align-items: center; gap: 6px;
+}
+.float-card-cat { color: var(--text-muted); font-size: 0.7rem; }
+.float-card-badge {
+  display: inline-block; margin-top: 6px;
+  font-size: 0.65rem; font-weight: 600;
+  padding: 2px 8px; border-radius: 10px;
+}
+
+/* Pastel colors for cards */
+.float-card.pastel-pink { background: #fdf2f8; border-color: #fbcfe8; }
+.float-card.pastel-pink .float-card-badge { background: #fbcfe8; color: #be185d; }
+.float-card.pastel-blue { background: #eff6ff; border-color: #bfdbfe; }
+.float-card.pastel-blue .float-card-badge { background: #bfdbfe; color: #1d4ed8; }
+.float-card.pastel-green { background: #f0fdf4; border-color: #bbf7d0; }
+.float-card.pastel-green .float-card-badge { background: #bbf7d0; color: #15803d; }
+.float-card.pastel-purple { background: #faf5ff; border-color: #e9d5ff; }
+.float-card.pastel-purple .float-card-badge { background: #e9d5ff; color: #7e22ce; }
+.float-card.pastel-amber { background: #fffbeb; border-color: #fde68a; }
+.float-card.pastel-amber .float-card-badge { background: #fde68a; color: #b45309; }
+.float-card.pastel-teal { background: #f0fdfa; border-color: #99f6e4; }
+.float-card.pastel-teal .float-card-badge { background: #99f6e4; color: #0f766e; }
+
+/* Hide on smaller screens where they'd overlap content */
+@media (max-width: 1280px) {
+  .floating-cards { display: none; }
+}

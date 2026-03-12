@@ -78,6 +78,35 @@ searchInput.addEventListener('input', function() {
   render(searchInput.value);
 });
 
+// ============ FLOATING SIDE CARDS ============
+(function() {
+  var pastels = ['pastel-pink','pastel-blue','pastel-green','pastel-purple','pastel-amber','pastel-teal'];
+  var badges = ['⭐ À découvrir','🔥 Populaire','💎 Artisan local','🌿 Éco-responsable','🏆 Recommandé','✨ Nouveau'];
+  var leftEl = document.getElementById('float-left');
+  var rightEl = document.getElementById('float-right');
+
+  // Pick random businesses for side cards
+  var shuffled = allBiz.slice().sort(function() { return 0.5 - Math.random(); });
+  var picks = shuffled.slice(0, 10);
+
+  picks.forEach(function(b, i) {
+    var side = i % 2 === 0 ? leftEl : rightEl;
+    var pastel = pastels[i % pastels.length];
+    var badge = badges[i % badges.length];
+
+    var card = document.createElement('a');
+    card.href = b.url;
+    card.target = '_blank';
+    card.rel = 'noopener';
+    card.className = 'float-card ' + pastel;
+    card.innerHTML =
+      '<div class="float-card-name">' + b.name + '</div>' +
+      '<div class="float-card-cat">' + b.cat + '</div>' +
+      '<span class="float-card-badge">' + badge + '</span>';
+    side.appendChild(card);
+  });
+})();
+
 // ============ TAG FILTER ============
 tagsEl.addEventListener('click', function(e) {
   if (!e.target.classList.contains('tag')) return;
