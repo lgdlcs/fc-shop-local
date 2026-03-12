@@ -3,260 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shop Local Franche-Comté — L'annuaire des pros d'ici</title>
-  <meta name="description" content="Annuaire des artisans, commerçants et services de proximité en Franche-Comté. Doubs · Haute-Saône · Jura. Consommez local !">
+  <title>Shop Local FC — Annuaire des commerces de Franche-Comté</title>
+  <meta name="description" content="Découvrez les TPE, PME et artisans de Franche-Comté. Annuaire local, gratuit, pour soutenir l'économie de proximité.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏪</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- BANNER PARTENAIRES (défilant) -->
-  <div class="top-banner">
-    <img src="images/banner-partners.jpg" alt="Nos partenaires">
-  </div>
-
   <!-- NAV -->
-  <nav class="nav" id="nav">
+  <nav class="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <img src="images/logo-main.png" alt="Shop Local Franche-Comté">
-      </a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="#doubs">Doubs</a></li>
-        <li><a href="#haute-saone">Haute-Saône</a></li>
-        <li><a href="#jura">Jura</a></li>
-        <li><a href="#categories">Catégories</a></li>
-        <li><a href="#marques">Nos marques</a></li>
-        <li><a href="#offres">Offres partenaires</a></li>
-        <li><a href="#contact" class="nav-cta">Devenir client</a></li>
-      </ul>
+      <a href="#" class="nav-logo">🏪 Shop Local FC</a>
+      <div class="nav-links">
+        <a href="https://www.facebook.com/profile.php?id=100092615653651" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/shop.local.franche.comte/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.youtube.com/@ShopLocal-w9k" target="_blank" rel="noopener">YouTube</a>
+      </div>
     </div>
   </nav>
 
   <!-- HERO -->
   <header class="hero">
-    <div class="hero-bg" style="background-image:url('images/hero-bg.jpg')"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <img src="images/logo-main.png" alt="Shop Local Franche-Comté" class="hero-logo">
-      <p class="hero-tagline">🏔️ Doubs · Haute-Saône · Jura</p>
-      <h1>Vos artisans et commerçants<br>de Franche-Comté</h1>
-      <p class="hero-sub">Trouvez les professionnels de proximité près de chez vous.<br>Soutenez l'économie locale, consommez d'ici.</p>
-      <div class="hero-actions">
-        <a href="#doubs" class="btn btn-green btn-lg">🔍 Trouver un professionnel</a>
-        <a href="#contact" class="btn btn-white btn-lg">Référencer mon entreprise</a>
-      </div>
+    <h1>L'annuaire des commerces<br>de <span class="accent">Franche-Comté</span></h1>
+    <p class="hero-sub">TPE, PME, artisans — trouvez et soutenez les pros de votre région.</p>
+
+    <!-- SEARCH -->
+    <div class="search-bar">
+      <input type="text" id="search" placeholder="Rechercher un commerce, un métier...">
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <!-- CATEGORY TAGS -->
+    <div class="tags" id="tags">
+      <button class="tag active" data-cat="all">Tous</button>
     </div>
   </header>
 
-  <!-- DÉPARTEMENTS + ANNUAIRE -->
-  <section class="section" id="doubs">
-    <div class="container">
-      <div class="dept-header">
-        <span class="dept-number">25</span>
-        <div>
-          <h2 class="dept-title">Département du Doubs</h2>
-          <p class="dept-sub">Besançon · Pontarlier · Montbéliard · Morteau · Cussey-sur-l'Ognon</p>
-        </div>
-      </div>
-      <p class="annuaire-note">📍 Il peut y avoir des clients limitrophes</p>
-      <div class="annuaire-grid" id="grid-doubs">
-        <!-- Filled by JS from data -->
-      </div>
-    </div>
-  </section>
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat"><span id="count-total">0</span> commerces</div>
+    <div class="stat"><span id="count-doubs">0</span> Doubs</div>
+    <div class="stat"><span id="count-hs">0</span> Haute-Saône</div>
+    <div class="stat"><span id="count-jura">0</span> Jura</div>
+  </div>
 
-  <section class="section section-alt" id="haute-saone">
-    <div class="container">
-      <div class="dept-header">
-        <span class="dept-number">70</span>
-        <div>
-          <h2 class="dept-title">Département de Haute-Saône</h2>
-          <p class="dept-sub">Vesoul · Gray · Luxeuil-les-Bains · Héricourt</p>
-        </div>
-      </div>
-      <div class="annuaire-grid" id="grid-haute-saone">
-      </div>
+  <!-- DIRECTORY TABLE -->
+  <main class="container">
+    <div class="table-header">
+      <div class="col-rank">#</div>
+      <div class="col-name">Commerce</div>
+      <div class="col-cat">Catégorie</div>
+      <div class="col-dept">Département</div>
+      <div class="col-link"></div>
     </div>
-  </section>
-
-  <section class="section" id="jura">
-    <div class="container">
-      <div class="dept-header">
-        <span class="dept-number">39</span>
-        <div>
-          <h2 class="dept-title">Département du Jura</h2>
-          <p class="dept-sub">Lons-le-Saunier · Dole · Saint-Claude · Champagnole</p>
-        </div>
-      </div>
-      <div class="annuaire-grid" id="grid-jura">
-      </div>
-    </div>
-  </section>
-
-  <!-- CATÉGORIES -->
-  <section class="section section-alt" id="categories">
-    <div class="container">
-      <h2 class="section-title">Choisissez votre catégorie</h2>
-      <p class="section-sub">et cliquez</p>
-      <div class="cat-grid">
-        <a href="#" class="cat-card"><span class="cat-emoji">🎉</span>Événementiel</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">🐴</span>Loisirs Equestre</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">🏠</span>Intér / Extér</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">👶</span>Naissance bébé</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">🛡️</span>Assurances</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">📻</span>Radios locales</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">🛁</span>Bains nordiques</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">♨️</span>Spas</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">🧶</span>Mercerie</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">🌿</span>Extérieur maison</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">🔍</span>Diagnostic immobilier</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">🪵</span>Bois dérivé</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">🏊</span>Piscines</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">🔧</span>Plomberie / Chauffage</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">💆</span>Bien-être</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">🏢</span>Immobilier</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">📋</span>Services administratifs</a>
-        <a href="#" class="cat-card"><span class="cat-emoji">🎨</span>Création graphique</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- NOS MARQUES -->
-  <section class="section" id="marques">
-    <div class="container">
-      <h2 class="section-title">L'écosystème Shop Local</h2>
-      <p class="section-sub">5 marques au service des pros de Franche-Comté</p>
-      <div class="marques-grid">
-        <a href="#" class="marque-card">
-          <img src="images/logo-main.png" alt="Shop Local Franche-Comté">
-          <span>Shop Local Franche-Comté</span>
-          <p>L'annuaire de référence</p>
-        </a>
-        <a href="#" class="marque-card">
-          <img src="images/logo-marketplace.png" alt="Shop Local Marketplace">
-          <span>Marketplace</span>
-          <p>Vos produits en ligne</p>
-        </a>
-        <a href="#" class="marque-card">
-          <img src="images/logo-service.png" alt="Shop Local Service">
-          <span>Service</span>
-          <p>Vos prestations visibles</p>
-        </a>
-        <a href="#" class="marque-card">
-          <img src="images/logo-creation.png" alt="Shop Création">
-          <span>Shop Création</span>
-          <p>Visuels & graphisme</p>
-        </a>
-        <a href="#" class="marque-card">
-          <img src="images/logo-webradio.png" alt="WebRadio Plus">
-          <span>WebRadio Plus FC</span>
-          <p>La radio locale</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- OFFRES & PLACES GRATUITES -->
-  <section class="section section-green" id="offres">
-    <div class="container">
-      <h2 class="section-title" style="color:#fff">🎟️ Offres & Places gratuites</h2>
-      <p class="section-sub" style="color:rgba(255,255,255,0.8)">Découvrez les offres spéciales de nos partenaires et tentez de gagner des places pour des spectacles et événements en Franche-Comté.</p>
-      <div class="offres-actions">
-        <a href="#contact" class="btn btn-white btn-lg">Demandez votre place GRATUITE</a>
-        <a href="#" class="btn btn-outline-white btn-lg">Diffusez vos événements</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ENTRE PROS D'ICI -->
-  <section class="section section-alt" id="entrepros">
-    <div class="container">
-      <div class="entreprosdici">
-        <img src="images/logo-entreprosdici.png" alt="Entre Pros d'Ici">
-        <div>
-          <h3>Entre Pros d'Ici</h3>
-          <p>Le réseau de mise en relation entre entrepreneurs de Franche-Comté. Rencontrez-vous, échangez, développez votre activité ensemble.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA DEVENIR CLIENT -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="cta-box">
-        <span class="cta-emoji">🤝</span>
-        <h2>Vous êtes professionnel en Franche-Comté ?</h2>
-        <p>Rejoignez l'annuaire Shop Local et gagnez en visibilité auprès des habitants de votre département.</p>
-        <div class="cta-actions">
-          <a href="mailto:info@fc-shop-local.fr" class="btn btn-green btn-lg">📧 Demande de prise de contact</a>
-        </div>
-        <div class="cta-social">
-          <a href="https://www.facebook.com/profile.php?id=100092615653651" target="_blank" rel="noopener">📘 Facebook</a>
-          <a href="https://www.instagram.com/shop.local.franche.comte/" target="_blank" rel="noopener">📷 Instagram</a>
-          <a href="https://www.youtube.com/@ShopLocal-w9k" target="_blank" rel="noopener">▶️ YouTube</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HORAIRES POINT COLIS -->
-  <section class="section section-alt" id="colis">
-    <div class="container">
-      <div class="colis-banner">
-        <span>📦</span>
-        <div>
-          <h3>Horaires Point Colis</h3>
-          <p>Service de réception et d'envoi de colis pour les professionnels du réseau.</p>
-        </div>
-        <a href="#" class="btn btn-green">Voir les horaires</a>
-      </div>
-    </div>
-  </section>
+    <div id="directory-list"></div>
+    <p class="empty-state" id="empty-state" style="display:none">Aucun résultat pour cette recherche.</p>
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <img src="images/logo-main.png" alt="Shop Local" class="footer-logo">
-          <ul class="footer-marques">
-            <li>Shop Local Franche-Comté</li>
-            <li>Shop Local Marketplace</li>
-            <li>Shop Local Service</li>
-            <li>Shop Création</li>
-            <li>WebradioPlus Franche-Comté</li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Départements</h4>
-          <ul>
-            <li><a href="#doubs">Doubs (25)</a></li>
-            <li><a href="#haute-saone">Haute-Saône (70)</a></li>
-            <li><a href="#jura">Jura (39)</a></li>
-            <li><a href="#categories">Catégories</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Liens</h4>
-          <ul>
-            <li><a href="https://www.facebook.com/profile.php?id=100092615653651" target="_blank">Facebook</a></li>
-            <li><a href="https://www.instagram.com/shop.local.franche.comte/" target="_blank">Instagram</a></li>
-            <li><a href="https://www.youtube.com/@ShopLocal-w9k" target="_blank">YouTube</a></li>
-            <li><a href="#">Avis Google</a></li>
-            <li><a href="#">CGV</a></li>
-            <li><a href="#">Aides aux associations</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2026 FC Shop Local — Tous droits réservés</p>
-        <p>Site par <a href="https://lgdlcs.github.io/alt-tab-studio/" target="_blank" rel="noopener">Alt Tab Studio</a></p>
-      </div>
+    <div class="footer-inner">
+      <p>🏪 Shop Local FC — Annuaire gratuit des commerces de Franche-Comté</p>
+      <p class="footer-copy">© 2026 · Site par <a href="https://lgdlcs.github.io/alt-tab-studio/" target="_blank" rel="noopener">Alt Tab Studio</a></p>
     </div>
   </footer>
 
